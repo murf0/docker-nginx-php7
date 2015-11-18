@@ -1,10 +1,11 @@
 galeratest:
-  image: ''
+  image: 'tutum.co/murf/nginx-php7:latest'
   autoredeploy: true
   restart: on-failure
-  roles:
-    - global
   sequential_deployment: true
   target_num_containers: 1
   volumes:
     - /data/
+  environment:
+    - WWW=
+    - ETC=
