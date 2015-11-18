@@ -1,15 +1,15 @@
 #!/bin/sh
-set -e
+set -ex
 if [ ! "x${ETC}" = "x" ]; then
-    cd /data/etc
-    rm -rf *
-    git -c http.sslVerify=false clone ${ETC}
+    rm -rf /data/etc/
+    mkdir /data/etc/
+    git -c http.sslVerify=false clone ${ETC} /data/etc/
     echo "Cloned etc config"
 fi
 
 if [ ! "x${WWW}" = "x" ]; then
-    cd /data/www
-    rm -rf *
-    git -c http.sslVerify=false clone ${WWW}
+    rm -rf /data/www/
+    mkdir /data/www/
+    git -c http.sslVerify=false clone ${WWW} /data/www/
     echo "Cloned www config"
 fi

@@ -1,11 +1,20 @@
-galeratest:
+lb-nginx:
+  image: 'tutum/haproxy:latest'
+  links:
+    - nginx
+  ports:
+    - '8080:80'
+    - '44300:443'
+  roles:
+    - global
+
+nginx:
   image: 'tutum.co/murf/nginx-php7:latest'
   autoredeploy: true
+  environment:
+    - 'ETC=https://Murf:Q8pm6B6tJ9sYupUU4U3wHqp6z@git.gogs.murf.svc.tutum.io:10080/Murf/nginx-conf.git'
+    - 'WWW=https://Murf:Q8pm6B6tJ9sYupUU4U3wHqp6z@git.gogs.murf.svc.tutum.io:10080/Murf/www.git'
   restart: on-failure
   sequential_deployment: true
-  target_num_containers: 1
   volumes:
-    - /data/
-  environment:
-    - WWW=
-    - ETC=
+    - /data
