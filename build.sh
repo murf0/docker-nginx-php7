@@ -26,8 +26,8 @@ NGINX="nginx"
 EXTRA="git jq"
 
 #To install latest version of nginx
-echo "deb http://nginx.org/packages/mainline/debian/ trusty nginx
-deb-src http://nginx.org/packages/mainline/debian/ trusty nginx" > /etc/apt/sources.list.d/nginx.list
+echo "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx" > /etc/apt/sources.list.d/nginx.list
 curl -s -o nginx_signing.key http://nginx.org/keys/nginx_signing.key
 apt-key add nginx_signing.key
 rm nginx_signing.key
