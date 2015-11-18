@@ -26,7 +26,11 @@ NGINX="nginx"
 EXTRA="git jq"
 
 #To install latest version of nginx
-add-apt-repository ppa:nginx/stable
+echo "deb http://nginx.org/packages/mainline/debian/ trusty nginx
+deb-src http://nginx.org/packages/mainline/debian/ trusty nginx" > /etc/apt/sources.list.d/nginx.list
+curl -s -o nginx_signing.key http://nginx.org/keys/nginx_signing.key
+apt-key add nginx_signing.key
+rm nginx_signing.key
 apt-get update
 
 apt-get install --no-install-recommends -y $PHP7DEPS $NGINX $EXTRA
