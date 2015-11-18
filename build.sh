@@ -25,6 +25,10 @@ NGINX="nginx"
 
 EXTRA="git jq"
 
+#To install latest version of nginx
+add-apt-repository ppa:nginx/stable
+apt-get update
+
 apt-get install --no-install-recommends -y $PHP7DEPS $NGINX $EXTRA
 
 cd /
