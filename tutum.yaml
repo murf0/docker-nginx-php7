@@ -1,5 +1,5 @@
 galeratest:
-  image: 'tutum.co/murf/mariadb-galera:latest'
+  image: ''
   autoredeploy: true
   restart: on-failure
   roles:
@@ -7,4 +7,4 @@ galeratest:
   sequential_deployment: true
   target_num_containers: 1
   volumes:
-    - /var/lib/mysql
+    - /data/
