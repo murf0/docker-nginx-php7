@@ -30,13 +30,21 @@ apt-get install --no-install-recommends -y $PHP7DEPS $NGINX $EXTRA
 cd /
 tar -xzPf /tmp/php.tar.gz
 
-cp /usr/local/php7/etc/php-fpm.conf.default /etc/php-fpm.conf
 cp  /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
-sed -i 's#group = nobody#group = nogroup#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#group = nobody#group = www-data#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#user = nobody#user = www-data#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#;listen.owner = nobody#listen.owner = www-data#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#;listen.group = nogroup#listen.group = www-data#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#;listen.mode = 0660#listen.mode = 0750#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+sed -i 's#listen = 127.0.0.1:9000#listen = /var/run/php7-fpm.sock#g'  /usr/local/php7/etc/php-fpm.d/www.conf
+
+cp /usr/local/php7/etc/php-fpm.conf.default /etc/php-fpm.conf
 sed -i 's#;pid = run/php-fpm.pid#pid = /var/run/php-fpm.pid#g' /etc/php-fpm.conf
 sed -i 's#;daemonize = yes#daemonize = no#g' /etc/php-fpm.conf
+
 curl -s https://raw.githubusercontent.com/ryantenney/php7/master/php.ini-production -o /usr/local/php7/lib/php.ini
 echo "zend_extension=opcache.so" >> /usr/local/php7/lib/php.ini
+
 
 echo "daemon off;
 $(cat /etc/nginx/nginx.conf)" > /etc/nginx/nginx.conf

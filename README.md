@@ -16,18 +16,35 @@ Symlinks
 ```
 
 #Shortinfo
-Empty container with no configuration done. Edit the files in your docker container volume to setup.
+Empty container with no configuration done. Edit the files in your docker container volume to setup for use with php and nginx. php7-fpm is listening at the socket /var/run/php7-fpm.sock
 
 PHP7-FPM and NGINX starts via runit scripts
-
-#Maintainer
-Mikael Mellgren <mikael@murf.se> gpg:37F17EEC
-
 
 #Build process
 ```
 git clone https://github.com/murf0/docker-nginx-php7.git
 docker build -t nginx-php7:latest docker-nginx-php7
+docker run -v /data:/data -P nginx-php7:latest --name php7test
 ```
 
 This will pull the latest php7 nightly and install in a new docker image
+
+#Sample nginx config
+Add this in your  server { } block
+```
+# pass the PHP scripts to FastCGI server listening on /var/run/php7-fpm.sock
+    #
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php7-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+        fastcgi_index index.php;
+        include fastcgi_params;
+    }   
+```
+
+
+#Maintainer
+Mikael Mellgren <mikael@murf.se> gpg:37F17EEC
