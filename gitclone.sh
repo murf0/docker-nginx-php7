@@ -11,5 +11,6 @@ if [ ! "x${WWW}" = "x" ]; then
     rm -rf /data/www/
     mkdir /data/www/
     git -c http.sslVerify=false clone ${WWW} /data/www/
+    chown -R www-data:www-data /data/www/
     echo "Cloned www config"
 fi
