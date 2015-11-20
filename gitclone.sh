@@ -5,6 +5,9 @@ if [ ! "x${ETC}" = "x" ]; then
     mkdir /data/etc/
     git -c http.sslVerify=false clone ${ETC} /data/etc/
     echo "Cloned etc config"
+    if [ -f posthook.sh ]; then
+        sh posthook.sh
+    fi
 fi
 
 if [ ! "x${WWW}" = "x" ]; then
