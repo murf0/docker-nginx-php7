@@ -13,7 +13,6 @@ RUN /build.sh
 
 COPY gitclone.sh /etc/my_init.d/gitclone.sh
 RUN chmod 755 /etc/my_init.d/gitclone.sh
-RUN /etc/my_init.d/gitclone.sh
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

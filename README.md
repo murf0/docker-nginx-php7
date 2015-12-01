@@ -46,12 +46,10 @@ Add this in your  server { } block
 ```
 
 #Extra optional git clone
-If the for each of the environment variables a git clone will be done from the value to the 
+For each of the environment variables specified below a git clone will be performed. This is done every start of the container, So be careful.
+_WARNING_ if these variables are set at restart of the container or host all files local to the container will be removed.
 
-For each of the environment variables specified below a git clone will be performed.
-WARNING if these variables are set at restart all files local to the container will be removed.
-
-
+see script gitclone.sh for more info.
 
 ##Environment
 ```
